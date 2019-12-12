@@ -12,10 +12,8 @@ const Wrapper = styled.button`
   outline: none;
 `
 
-const Button = (props) => {
-    return (
-    <Wrapper>{props.text}</Wrapper>
-    )
+const Button = props => {
+  return <Wrapper>{props.text}</Wrapper>
 }
 
 export default Button

@@ -14,13 +14,26 @@ const Body = styled.div`
   margin: 0 auto;
 `
 
+const hotspotList = [
+  {
+    title: 'Hotspot #1',
+    x: 1,
+    y: 1
+  },
+  {
+    title: 'Hotspot #2',
+    x: 2,
+    y: 2
+  }
+]
+
 const Home = () => {
   return (
     <Wrapper>
       <Header></Header>
       <Body>
         <Button text="Create Hotspot"></Button>
-        <HotspotList></HotspotList>
+        <HotspotList hotspotList={hotspotList}></HotspotList>
       </Body>
     </Wrapper>
   )

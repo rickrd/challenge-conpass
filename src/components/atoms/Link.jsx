@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Link = (props) => {
+const Link = props => {
   return <a href={props.href}>{props.text}</a>
 }
 
