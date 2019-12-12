@@ -15,7 +15,7 @@ const HotspotList = props => {
     <Wrapper>
       <h3>List of hotspots</h3>
       <ul>
-        {props.hotspotList ? (
+        {props.hotspotList.length ? (
           props.hotspotList.map(hotspot => <Hotspot title={hotspot.title}></Hotspot>)
         ) : (
           <li>No hotspot found</li>

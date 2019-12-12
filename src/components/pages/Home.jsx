@@ -15,16 +15,16 @@ const Body = styled.div`
 `
 
 const hotspotList = [
-  {
-    title: 'Hotspot #1',
-    x: 1,
-    y: 1
-  },
-  {
-    title: 'Hotspot #2',
-    x: 2,
-    y: 2
-  }
+  //   {
+  //     title: 'Hotspot #1',
+  //     x: 1,
+  //     y: 1
+  //   },
+  //   {
+  //     title: 'Hotspot #2',
+  //     x: 2,
+  //     y: 2
+  //   }
 ]
 
 const Home = () => {
