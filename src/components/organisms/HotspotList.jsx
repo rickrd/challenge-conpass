@@ -4,9 +4,19 @@ import Hotspot from '../molecules/Hotspot'
 
 const Wrapper = styled.div`
   margin: 0 auto;
+  max-width: 400px;
+
+  h3 {
+    text-align: left;
+    padding: 6px 6px;
+    color: #b9b9b9;
+    background-color: #ebebeb;
+    font-weight: normal;
+  }
 
   ul {
     list-style: none;
+    padding: 0;
   }
 `
 
