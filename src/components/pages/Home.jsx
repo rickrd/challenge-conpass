@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Header from '../organisms/Header'
 import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
+import { addHotspot } from '../redux/actions'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -32,23 +33,27 @@ const handleMouseMove = e => {
   console.log(e.target)
 }
 
-const handleMouseClick = e => {
+const handleMouseClick = (e, store) => {
   alert('clicked')
   console.log(e)
+  console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
+  store.dispatch(addHotspot('hotspot #3'))
 }
 
-const handleCreateHotspot = () => {
-  document.addEventListener('click', handleMouseClick, { once: true })
+const handleCreateHotspot = store => {
+  document.addEventListener('click', e => handleMouseClick(e, store), { once: true })
   document.addEventListener('mousemove', handleMouseMove)
 }
 
-const Home = () => {
+const Home = props => {
+  const { store } = props
+  console.log(store.getState())
   return (
     <Wrapper>
       <Header></Header>
       <Body>
-        <Button onClick={handleCreateHotspot} text="Create Hotspot"></Button>
+        <Button onClick={() => handleCreateHotspot(store)} text="Create Hotspot"></Button>
         <HotspotList hotspotList={hotspotList}></HotspotList>
       </Body>
     </Wrapper>
