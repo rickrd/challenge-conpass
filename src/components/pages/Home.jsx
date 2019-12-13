@@ -39,7 +39,7 @@ const handleMouseClick = e => {
 }
 
 const handleCreateHotspot = () => {
-  document.addEventListener('click', handleMouseClick, {once: true})
+  document.addEventListener('click', handleMouseClick, { once: true })
   document.addEventListener('mousemove', handleMouseMove)
 }
 
