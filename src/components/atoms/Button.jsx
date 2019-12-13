@@ -13,7 +13,7 @@ const Wrapper = styled.button`
 `
 
 const Button = props => {
-  return <Wrapper>{props.text}</Wrapper>
+  return <Wrapper onClick={props.onClick}>{props.text}</Wrapper>
 }
 
 export default Button
