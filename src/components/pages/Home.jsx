@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../organisms/Header'
 import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
-import { addHotspot } from '../redux/actions'
+import { addHotspot, showModal } from '../redux/actions'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -29,6 +29,15 @@ const hotspotList = [
   }
 ]
 
+const ModalWrapper = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  background: red;
+  top: 50px;
+  left: 50px;
+`
+
 const handleMouseMove = e => {
   console.log(e.target)
 }
@@ -38,7 +47,8 @@ const handleMouseClick = (e, store) => {
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
-  store.dispatch(addHotspot('hotspot #3'))
+  store.dispatch(showModal(true, 50, 50 ))
+  // store.dispatch(addHotspot('hotspot #3'))
 }
 
 const handleCreateHotspot = store => {
@@ -46,15 +56,25 @@ const handleCreateHotspot = store => {
   document.addEventListener('mousemove', handleMouseMove)
 }
 
+const Modal = props => {
+  console.log(props)
+  return props.subscribe(() => (
+    props.getState().modal.show ? <ModalWrapper></ModalWrapper> : null
+  ))
+  
+}
+
 const Home = props => {
   const { store } = props
   console.log(store.getState())
+  store.subscribe(() => console.log(store.getState()))
   return (
     <Wrapper>
       <Header></Header>
       <Body>
         <Button onClick={() => handleCreateHotspot(store)} text="Create Hotspot"></Button>
         <HotspotList hotspotList={hotspotList}></HotspotList>
+        <Modal {...store}></Modal>
       </Body>
     </Wrapper>
   )
