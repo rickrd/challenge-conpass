@@ -25,7 +25,7 @@ const hotspots = (state = initialState, action) => {
     case ADD_HOTSPOT:
       return Object.assign({}, state, {
         hotspots: [
-					...state.todos,
+					...state.hotspots,
 					{
 						title: action.title
 					}
