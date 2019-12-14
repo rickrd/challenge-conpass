@@ -47,9 +47,9 @@ const modal = (state = {}, action) => {
   switch (action.type) {
     case SHOW_MODAL:
       return Object.assign({}, state, {
-        show: action.show,
-        x: action.x,
-        y: action.y
+					show: action.show,
+					x: action.x,
+					y: action.y
       })
     default:
       return state

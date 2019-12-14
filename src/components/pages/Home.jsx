@@ -4,6 +4,7 @@ import Header from '../organisms/Header'
 import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
 import { addHotspot, showModal } from '../redux/actions'
+import { connect } from 'react-redux'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -30,12 +31,13 @@ const hotspotList = [
 ]
 
 const ModalWrapper = styled.div`
+  display: ${props => (props.show ? 'block' : 'none')};
   position: absolute;
   width: 100px;
   height: 50px;
   background: red;
-  top: 50px;
-  left: 50px;
+  top: ${props => props.x}px;
+  left: ${props => props.y}px;
 `
 
 const handleMouseMove = e => {
@@ -47,7 +49,7 @@ const handleMouseClick = (e, store) => {
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
-  store.dispatch(showModal(true, 50, 50 ))
+  store.dispatch(showModal(true, e.y, e.x))
   // store.dispatch(addHotspot('hotspot #3'))
 }
 
@@ -57,11 +59,15 @@ const handleCreateHotspot = store => {
 }
 
 const Modal = props => {
-  console.log(props)
-  return props.subscribe(() => (
-    props.getState().modal.show ? <ModalWrapper></ModalWrapper> : null
-  ))
-  
+  const { store } = props
+  console.log(store)
+  return store.getState().modal.show ? (
+    <ModalWrapper
+      show={store.getState().modal.show}
+      x={store.getState().modal.x}
+      y={store.getState().modal.y}
+    ></ModalWrapper>
+  ) : null
 }
 
 const Home = props => {
@@ -73,11 +79,18 @@ const Home = props => {
       <Header></Header>
       <Body>
         <Button onClick={() => handleCreateHotspot(store)} text="Create Hotspot"></Button>
-        <HotspotList hotspotList={hotspotList}></HotspotList>
-        <Modal {...store}></Modal>
+        <HotspotList hotspotList={store.getState().hotspots}></HotspotList>
+        <Modal store={store}></Modal>
       </Body>
     </Wrapper>
   )
 }
 
-export default Home
+function mapStateToProps(state, ownProps) {
+  return {
+    hotspots: state.hotspots,
+    modal: state.modal
+  }
+}
+
+export default connect(mapStateToProps)(Home)
