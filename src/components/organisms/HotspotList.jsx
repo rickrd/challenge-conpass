@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Hotspot from '../molecules/Hotspot'
+import HotspotListItem from '../molecules/HotspotListItem'
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -26,7 +26,13 @@ const HotspotList = props => {
       <h3>List of hotspots</h3>
       <ul>
         {props.hotspotList.length ? (
-          props.hotspotList.map(hotspot => <Hotspot key={hotspot.title} title={hotspot.title}></Hotspot>)
+          props.hotspotList.map(hotspot => (
+            <HotspotListItem
+              key={hotspot.title}
+              title={hotspot.title}
+              description={hotspot.description}
+            ></HotspotListItem>
+          ))
         ) : (
           <li>No hotspot found</li>
         )}

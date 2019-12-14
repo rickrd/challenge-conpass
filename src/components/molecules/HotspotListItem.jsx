@@ -13,13 +13,14 @@ const Wrapper = styled.li`
   font-size: 18px;
 `
 
-const Hotspot = props => {
+const HotspotListItem = props => {
   return (
     <Wrapper>
       <Link text={props.title}></Link>
+      <Link text={props.description}></Link>
       <Link text="Delete" href="#"></Link>
     </Wrapper>
   )
 }
 
-export default Hotspot
+export default HotspotListItem
