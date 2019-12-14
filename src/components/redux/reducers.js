@@ -14,10 +14,16 @@ import { ADD_HOTSPOT, SHOW_MODAL } from './actions'
 const initialState = {
   hotspots: [
     {
-      title: 'Hotspot #1'
+			title: 'Hotspot #1',
+			description: 'This is the hotspot #1',
+			x: 0,
+			y: 0
     },
     {
-      title: 'Hotspot #2'
+			title: 'Hotspot #2',
+			description: 'this is the hotspot #2',
+			x: 0,
+			y: 0
     }
   ],
   modal: {
