@@ -48,7 +48,6 @@ const handleMouseMove = e => {
 }
 
 const handleMouseClick = (e, store) => {
-  alert('clicked')
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
@@ -68,11 +67,7 @@ const Modal = props => {
     ? store
         .getState()
         .hotspots.map(hotspot => (
-          <ModalWrapper
-            show={true}
-            x={hotspot.x}
-            y={hotspot.y}
-          ></ModalWrapper>
+          <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}></ModalWrapper>
         ))
     : null
 }

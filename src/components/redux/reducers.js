@@ -1,16 +1,5 @@
 import { ADD_HOTSPOT, SHOW_MODAL } from './actions'
 
-// {
-//   hotspots: [
-//     {
-//       title: 'Hotspot #1'
-//     },
-//     {
-//       title: 'Hotspot #2'
-//     }
-//   ]
-// }
-
 const initialState = {
   hotspots: [
     {
