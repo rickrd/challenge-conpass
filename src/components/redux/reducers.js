@@ -5,14 +5,14 @@ const initialState = {
     {
       title: 'Hotspot #1',
       description: 'This is the hotspot #1',
-      x: 100,
-      y: 100
+      x: 500,
+      y: 500
     },
     {
       title: 'Hotspot #2',
       description: 'this is the hotspot #2',
-      x: 50,
-      y: 50
+      x: 1200,
+      y: 300
     }
   ],
   modal: {

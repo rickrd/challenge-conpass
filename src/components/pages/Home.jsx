@@ -5,6 +5,7 @@ import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
 import { addHotspot, showModal } from '../redux/actions'
 import { connect } from 'react-redux'
+import { prependToMemberExpression } from '@babel/types'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -17,19 +18,6 @@ const Body = styled.div`
   margin: 0 auto;
 `
 
-const hotspotList = [
-  {
-    title: 'Hotspot #1',
-    x: 1,
-    y: 1
-  },
-  {
-    title: 'Hotspot #2',
-    x: 2,
-    y: 2
-  }
-]
-
 const ModalWrapper = styled.div`
   display: ${props => (props.show ? 'block' : 'none')};
   position: absolute;
@@ -39,8 +27,20 @@ const ModalWrapper = styled.div`
   border-radius: 50%;
   padding: 2px;
   border: 1px solid red;
-  top: ${props => props.x}px;
-  left: ${props => props.y}px;
+  top: ${props => props.y -8}px;
+  left: ${props => props.x-8}px;
+`
+
+const EditHotspot = styled.div`
+  display: block;
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  top: 25px;
+  left: -100px;
 `
 
 const handleMouseMove = e => {
@@ -52,7 +52,7 @@ const handleMouseClick = (e, store) => {
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
   // store.dispatch(showModal(true, e.y, e.x))
-  store.dispatch(addHotspot('hotspot test', 'this is a hotspot', e.y, e.x))
+  store.dispatch(addHotspot('hotspot test', 'this is a hotspot', e.x, e.y))
 }
 
 const handleCreateHotspot = store => {
@@ -67,7 +67,12 @@ const Modal = props => {
     ? store
         .getState()
         .hotspots.map(hotspot => (
-          <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}></ModalWrapper>
+          <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}>
+            <EditHotspot x={hotspot.x} y={hotspot.y}>
+              <input></input>
+              <input></input>
+            </EditHotspot>
+          </ModalWrapper>
         ))
     : null
 }
