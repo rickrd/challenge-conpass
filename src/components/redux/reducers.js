@@ -14,16 +14,16 @@ import { ADD_HOTSPOT, SHOW_MODAL } from './actions'
 const initialState = {
   hotspots: [
     {
-			title: 'Hotspot #1',
-			description: 'This is the hotspot #1',
-			x: 100,
-			y: 100
+      title: 'Hotspot #1',
+      description: 'This is the hotspot #1',
+      x: 100,
+      y: 100
     },
     {
-			title: 'Hotspot #2',
-			description: 'this is the hotspot #2',
-			x: 50,
-			y: 50
+      title: 'Hotspot #2',
+      description: 'this is the hotspot #2',
+      x: 50,
+      y: 50
     }
   ],
   modal: {
@@ -36,17 +36,15 @@ const initialState = {
 const hotspots = (state = [], action) => {
   switch (action.type) {
     case ADD_HOTSPOT:
-      return Object.assign({}, state, {
-        hotspots: [
-          ...state.hotspots,
-          {
-						title: action.title,
-						description: action.description,
-						x: action.x,
-						y: action.y
-          }
-        ]
-      })
+      return [
+        ...state,
+        {
+          title: action.title,
+          description: action.description,
+          x: action.x,
+          y: action.y
+        }
+      ]
     default:
       return state
   }
@@ -56,9 +54,9 @@ const modal = (state = {}, action) => {
   switch (action.type) {
     case SHOW_MODAL:
       return Object.assign({}, state, {
-					show: action.show,
-					x: action.x,
-					y: action.y
+        show: action.show,
+        x: action.x,
+        y: action.y
       })
     default:
       return state

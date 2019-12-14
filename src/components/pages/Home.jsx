@@ -53,7 +53,7 @@ const handleMouseClick = (e, store) => {
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
   // store.dispatch(showModal(true, e.y, e.x))
-  // store.dispatch(addHotspot('hotspot #3'))
+  store.dispatch(addHotspot('hotspot test', 'this is a hotspot', e.y, e.x))
 }
 
 const handleCreateHotspot = store => {
