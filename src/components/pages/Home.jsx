@@ -33,9 +33,12 @@ const hotspotList = [
 const ModalWrapper = styled.div`
   display: ${props => (props.show ? 'block' : 'none')};
   position: absolute;
-  width: 100px;
-  height: 50px;
-  background: red;
+  width: 10px;
+  height: 10px;
+  background: rgb(247, 103, 104);
+  border-radius: 50%;
+  padding: 2px;
+  border: 1px solid red;
   top: ${props => props.x}px;
   left: ${props => props.y}px;
 `
@@ -49,7 +52,7 @@ const handleMouseClick = (e, store) => {
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
-  store.dispatch(showModal(true, e.y, e.x))
+  // store.dispatch(showModal(true, e.y, e.x))
   // store.dispatch(addHotspot('hotspot #3'))
 }
 
@@ -61,13 +64,17 @@ const handleCreateHotspot = store => {
 const Modal = props => {
   const { store } = props
   console.log(store)
-  return store.getState().modal.show ? (
-    <ModalWrapper
-      show={store.getState().modal.show}
-      x={store.getState().modal.x}
-      y={store.getState().modal.y}
-    ></ModalWrapper>
-  ) : null
+  return store.getState().hotspots.length
+    ? store
+        .getState()
+        .hotspots.map(hotspot => (
+          <ModalWrapper
+            show={true}
+            x={hotspot.x}
+            y={hotspot.y}
+          ></ModalWrapper>
+        ))
+    : null
 }
 
 const Home = props => {
