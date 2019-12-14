@@ -41,6 +41,10 @@ const EditHotspot = styled.div`
   border-radius: 5px;
   top: 25px;
   left: -100px;
+
+  input {
+    border: none;
+  }
 `
 
 const handleMouseMove = e => {
@@ -60,6 +64,12 @@ const handleCreateHotspot = store => {
   document.addEventListener('mousemove', handleMouseMove)
 }
 
+const handleEditHotspot = (e, store) => {
+  console.log(e.target)
+  // e.target.id === 'title' ? store.dispatch(editHotspot(title))
+  // store.dispatch(editHotspot())
+}
+
 const Modal = props => {
   const { store } = props
   console.log(store)
@@ -69,8 +79,8 @@ const Modal = props => {
         .hotspots.map(hotspot => (
           <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}>
             <EditHotspot x={hotspot.x} y={hotspot.y}>
-              <input></input>
-              <input></input>
+              <input id="title" value={hotspot.title} onChange={e => handleEditHotspot(e, store)}></input>
+              <input id="description" value={hotspot.description}></input>
             </EditHotspot>
           </ModalWrapper>
         ))
