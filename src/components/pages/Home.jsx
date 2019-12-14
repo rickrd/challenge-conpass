@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../organisms/Header'
 import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
-import { addHotspot, showModal, editHotspot } from '../redux/actions'
+import { addHotspot, showModal, editHotspotTitle } from '../redux/actions'
 import { connect } from 'react-redux'
 import { prependToMemberExpression } from '@babel/types'
 
@@ -67,7 +67,7 @@ const handleCreateHotspot = store => {
 const handleEditHotspot = (e, store, index) => {
   console.log(e.target)
   // e.target.id === 'title' ? store.dispatch(editHotspot(title))
-  store.dispatch(editHotspot(e.target.value, index))
+  store.dispatch(editHotspotTitle(e.target.value, index))
 }
 
 const Modal = props => {

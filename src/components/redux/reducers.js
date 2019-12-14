@@ -1,4 +1,4 @@
-import { ADD_HOTSPOT, SHOW_MODAL, EDIT_HOTSPOT } from './actions'
+import { ADD_HOTSPOT, SHOW_MODAL, EDIT_HOTSPOT_TITLE } from './actions'
 
 const initialState = {
   hotspots: [
@@ -34,7 +34,7 @@ const hotspots = (state = [], action) => {
           y: action.y
         }
       ]
-    case EDIT_HOTSPOT:
+    case EDIT_HOTSPOT_TITLE:
       return state.map((hotspot, index) => {
           if (index === action.index) {
             return Object.assign({}, hotspot, {
