@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../organisms/Header'
 import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
-import { addHotspot, showModal } from '../redux/actions'
+import { addHotspot, showModal, editHotspot } from '../redux/actions'
 import { connect } from 'react-redux'
 import { prependToMemberExpression } from '@babel/types'
 
@@ -27,8 +27,8 @@ const ModalWrapper = styled.div`
   border-radius: 50%;
   padding: 2px;
   border: 1px solid red;
-  top: ${props => props.y -8}px;
-  left: ${props => props.x-8}px;
+  top: ${props => props.y - 8}px;
+  left: ${props => props.x - 8}px;
 `
 
 const EditHotspot = styled.div`
@@ -64,26 +64,28 @@ const handleCreateHotspot = store => {
   document.addEventListener('mousemove', handleMouseMove)
 }
 
-const handleEditHotspot = (e, store) => {
+const handleEditHotspot = (e, store, index) => {
   console.log(e.target)
   // e.target.id === 'title' ? store.dispatch(editHotspot(title))
-  // store.dispatch(editHotspot())
+  store.dispatch(editHotspot(e.target.value, index))
 }
 
 const Modal = props => {
   const { store } = props
   console.log(store)
   return store.getState().hotspots.length
-    ? store
-        .getState()
-        .hotspots.map(hotspot => (
-          <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}>
-            <EditHotspot x={hotspot.x} y={hotspot.y}>
-              <input id="title" value={hotspot.title} onChange={e => handleEditHotspot(e, store)}></input>
-              <input id="description" value={hotspot.description}></input>
-            </EditHotspot>
-          </ModalWrapper>
-        ))
+    ? store.getState().hotspots.map((hotspot, index) => (
+        <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}>
+          <EditHotspot x={hotspot.x} y={hotspot.y}>
+            <input
+              id="title"
+              value={hotspot.title}
+              onChange={e => handleEditHotspot(e, store, index)}
+            ></input>
+            <input id="description" value={hotspot.description}></input>
+          </EditHotspot>
+        </ModalWrapper>
+      ))
     : null
 }
 
@@ -103,7 +105,7 @@ const Home = props => {
   )
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     hotspots: state.hotspots,
     modal: state.modal

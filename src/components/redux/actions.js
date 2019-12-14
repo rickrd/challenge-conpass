@@ -10,6 +10,6 @@ export function showModal(show, x, y) {
   return { type: SHOW_MODAL, show, x, y }
 }
 
-export function editHotspot(title, description) {
-  return { type: EDIT_HOTSPOT, title, description }
+export function editHotspot(title, index) {
+  return { type: EDIT_HOTSPOT, title, index }
 }
