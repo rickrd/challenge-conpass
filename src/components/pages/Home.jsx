@@ -48,7 +48,10 @@ const EditHotspot = styled.div`
 `
 
 const handleMouseMove = e => {
-  console.log(e.target)
+  console.log(e)
+  // document.get
+  // e.srcElement.style.border = '0'
+  // e.target.style.border = '1px solid red'
 }
 
 const handleMouseClick = (e, store) => {
@@ -56,7 +59,7 @@ const handleMouseClick = (e, store) => {
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
   // store.dispatch(showModal(true, e.y, e.x))
-  store.dispatch(addHotspot('hotspot test', 'this is a hotspot', e.x, e.y))
+  store.dispatch(addHotspot('Hotspot', 'This is a hotspot', e.x, e.y))
 }
 
 const handleCreateHotspot = store => {

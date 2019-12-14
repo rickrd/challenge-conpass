@@ -26,9 +26,9 @@ const HotspotList = props => {
       <h3>List of hotspots</h3>
       <ul>
         {props.hotspotList.length ? (
-          props.hotspotList.map(hotspot => (
+          props.hotspotList.map((hotspot, index) => (
             <HotspotListItem
-              key={hotspot.title}
+              key={index}
               title={hotspot.title}
               description={hotspot.description}
             ></HotspotListItem>
