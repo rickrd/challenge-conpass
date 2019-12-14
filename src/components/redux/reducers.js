@@ -40,7 +40,10 @@ const hotspots = (state = [], action) => {
         hotspots: [
           ...state.hotspots,
           {
-            title: action.title
+						title: action.title,
+						description: action.description,
+						x: action.x,
+						y: action.y
           }
         ]
       })
