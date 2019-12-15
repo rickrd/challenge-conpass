@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from '../atoms/Link'
+import {removeHotspot} from '../redux/actions'
 
 const Wrapper = styled.li`
   display: flex;
@@ -13,12 +14,23 @@ const Wrapper = styled.li`
   font-size: 18px;
 `
 
+const handleRemoveHotspot = props => {
+  const {store, index} = props
+  store.dispatch(removeHotspot(index))
+}
+
 const HotspotListItem = props => {
   return (
     <Wrapper>
       <Link text={props.title}></Link>
       <Link text={props.description}></Link>
-      <Link text="Delete" href="#"></Link>
+      <a
+      
+        href="#"
+        onClick={() => {
+          handleRemoveHotspot(props)
+        }}
+      >Delete</a>
     </Wrapper>
   )
 }

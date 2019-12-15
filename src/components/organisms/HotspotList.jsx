@@ -29,8 +29,10 @@ const HotspotList = props => {
           props.hotspotList.map((hotspot, index) => (
             <HotspotListItem
               key={index}
+              index={index}
               title={hotspot.title}
               description={hotspot.description}
+              store={props.store}
             ></HotspotListItem>
           ))
         ) : (

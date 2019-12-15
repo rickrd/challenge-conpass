@@ -25,7 +25,7 @@ const Home = props => {
       <Header></Header>
       <Body>
         <Button store={store} text="Create Hotspot"></Button>
-        <HotspotList hotspotList={store.getState().hotspots}></HotspotList>
+        <HotspotList hotspotList={store.getState().hotspots} store={store}></HotspotList>
         <Hotspot store={store}></Hotspot>
       </Body>
     </Wrapper>
