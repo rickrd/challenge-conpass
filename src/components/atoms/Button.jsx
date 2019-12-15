@@ -14,18 +14,21 @@ const Wrapper = styled.button`
 `
 
 const handleMouseMove = e => {
-  console.log(e)
-  // document.get
-  // e.srcElement.style.border = '0'
-  // e.target.style.border = '1px solid red'
+  for (var i = 0; i < document.getElementsByTagName('*').length; i++) {
+    if (document.getElementsByTagName('*')[i] != e.target) {
+      document.getElementsByTagName('*')[i].style.border = 0
+    } else {
+      e.target.style.border = '2px solid red'
+    }
+  }
 }
 
 const handleMouseClick = (e, store) => {
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
-  // store.dispatch(showHotspot(true, e.y, e.x))
   store.dispatch(addHotspot('Hotspot', 'This is a hotspot', e.x, e.y))
+  e.target.style.border = 0
 }
 
 const handleCreateHotspot = store => {
