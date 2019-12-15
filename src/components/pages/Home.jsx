@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Header from '../organisms/Header'
 import Button from '../atoms/Button'
 import HotspotList from '../organisms/HotspotList'
+import Hotspot from '../organisms/Hotspot'
 import { addHotspot, showModal, editHotspotTitle, editHotspotDescription } from '../redux/actions'
 import { connect } from 'react-redux'
 import { prependToMemberExpression } from '@babel/types'
@@ -18,35 +19,6 @@ const Body = styled.div`
   margin: 0 auto;
 `
 
-const ModalWrapper = styled.div`
-  display: ${props => (props.show ? 'block' : 'none')};
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: rgb(247, 103, 104);
-  border-radius: 50%;
-  padding: 2px;
-  border: 1px solid red;
-  top: ${props => props.y - 8}px;
-  left: ${props => props.x - 8}px;
-`
-
-const EditHotspot = styled.div`
-  display: block;
-  position: absolute;
-  width: 200px;
-  height: 100px;
-  background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  top: 25px;
-  left: -100px;
-
-  input {
-    border: none;
-  }
-`
-
 const handleMouseMove = e => {
   console.log(e)
   // document.get
@@ -58,43 +30,13 @@ const handleMouseClick = (e, store) => {
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
-  // store.dispatch(showModal(true, e.y, e.x))
+  // store.dispatch(showHotspot(true, e.y, e.x))
   store.dispatch(addHotspot('Hotspot', 'This is a hotspot', e.x, e.y))
 }
 
 const handleCreateHotspot = store => {
   document.addEventListener('click', e => handleMouseClick(e, store), { once: true })
   document.addEventListener('mousemove', handleMouseMove)
-}
-
-const handleEditHotspot = (e, store, index) => {
-  console.log(e.target)
-  e.target.id === 'title'
-    ? store.dispatch(editHotspotTitle(e.target.value, index))
-    : store.dispatch(editHotspotDescription(e.target.value, index))
-}
-
-const Modal = props => {
-  const { store } = props
-  console.log(store)
-  return store.getState().hotspots.length
-    ? store.getState().hotspots.map((hotspot, index) => (
-        <ModalWrapper show={true} x={hotspot.x} y={hotspot.y}>
-          <EditHotspot x={hotspot.x} y={hotspot.y}>
-            <input
-              id="title"
-              value={hotspot.title}
-              onChange={e => handleEditHotspot(e, store, index)}
-            ></input>
-            <input
-              id="description"
-              value={hotspot.description}
-              onChange={e => handleEditHotspot(e, store, index)}
-            ></input>
-          </EditHotspot>
-        </ModalWrapper>
-      ))
-    : null
 }
 
 const Home = props => {
@@ -107,7 +49,7 @@ const Home = props => {
       <Body>
         <Button onClick={() => handleCreateHotspot(store)} text="Create Hotspot"></Button>
         <HotspotList hotspotList={store.getState().hotspots}></HotspotList>
-        <Modal store={store}></Modal>
+        <Hotspot store={store}></Hotspot>
       </Body>
     </Wrapper>
   )
