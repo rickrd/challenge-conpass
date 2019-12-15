@@ -35,8 +35,7 @@ const Home = props => {
 
 function mapStateToProps(state) {
   return {
-    hotspots: state.hotspots,
-    modal: state.modal
+    hotspots: state.hotspots
   }
 }
 

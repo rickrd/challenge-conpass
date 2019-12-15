@@ -3,7 +3,7 @@ import { editHotspotTitle, editHotspotDescription } from '../redux/actions'
 import styled from 'styled-components'
 
 const HotspotWrapper = styled.div`
-  display: ${props => (props.show ? 'block' : 'none')};
+  display: block;
   position: absolute;
   width: 10px;
   height: 10px;
@@ -16,7 +16,7 @@ const HotspotWrapper = styled.div`
 `
 
 const EditHotspot = styled.div`
-  display: block;
+  display: ${props => (props.show ? 'block' : 'none')};
   position: absolute;
   width: 200px;
   height: 100px;
@@ -43,8 +43,8 @@ const Hotspot = props => {
   console.log(store)
   return store.getState().hotspots.length
     ? store.getState().hotspots.map((hotspot, index) => (
-        <HotspotWrapper show={true} x={hotspot.x} y={hotspot.y}>
-          <EditHotspot x={hotspot.x} y={hotspot.y}>
+        <HotspotWrapper x={hotspot.x} y={hotspot.y}>
+          <EditHotspot show={false} x={hotspot.x} y={hotspot.y}>
             <input
               id="title"
               value={hotspot.title}

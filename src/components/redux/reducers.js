@@ -1,4 +1,4 @@
-import { ADD_HOTSPOT, SHOW_MODAL, EDIT_HOTSPOT_TITLE, EDIT_HOTSPOT_DESCRIPTION } from './actions'
+import { ADD_HOTSPOT, EDIT_HOTSPOT_TITLE, EDIT_HOTSPOT_DESCRIPTION } from './actions'
 
 const initialState = {
   hotspots: [
@@ -14,12 +14,7 @@ const initialState = {
       x: 1200,
       y: 300
     }
-  ],
-  modal: {
-    show: false,
-    x: 0,
-    y: 0
-  }
+  ]
 }
 
 const hotspots = (state = [], action) => {
@@ -56,22 +51,8 @@ const hotspots = (state = [], action) => {
   }
 }
 
-const modal = (state = {}, action) => {
-  switch (action.type) {
-    case SHOW_MODAL:
-      return Object.assign({}, state, {
-        show: action.show,
-        x: action.x,
-        y: action.y
-      })
-    default:
-      return state
-  }
-}
-
 export default function reducers(state = initialState, action) {
   return {
-    hotspots: hotspots(state.hotspots, action),
-    modal: modal(state.modal, action)
+    hotspots: hotspots(state.hotspots, action)
   }
 }
