@@ -1,5 +1,5 @@
 import React from 'react'
-import { editHotspotTitle, editHotspotDescription } from '../redux/actions'
+import { editHotspotTitle, editHotspotDescription, editableHotspot } from '../redux/actions'
 import styled from 'styled-components'
 
 const HotspotWrapper = styled.div`
@@ -13,6 +13,8 @@ const HotspotWrapper = styled.div`
   border: 1px solid red;
   top: ${props => props.y - 8}px;
   left: ${props => props.x - 8}px;
+  cursor: pointer;
+  z-index: 9;
 `
 
 const EditHotspot = styled.div`
@@ -23,9 +25,9 @@ const EditHotspot = styled.div`
   background-color: #fff;
   border: 1px solid #eee;
   border-radius: 5px;
-  top: 25px;
-  left: -100px;
-
+  top: ${props => props.y + 20}px;
+  left: ${props => props.x - 100}px;
+  z-index: 8;
   input {
     border: none;
   }
@@ -38,13 +40,22 @@ const handleEditHotspot = (e, store, index) => {
     : store.dispatch(editHotspotDescription(e.target.value, index))
 }
 
+const handleHotspotClick = (e, store, index) => {
+  store.dispatch(editableHotspot(index))
+}
+
 const Hotspot = props => {
   const { store } = props
   console.log(store)
   return store.getState().hotspots.length
     ? store.getState().hotspots.map((hotspot, index) => (
-        <HotspotWrapper x={hotspot.x} y={hotspot.y}>
-          <EditHotspot show={false} x={hotspot.x} y={hotspot.y}>
+        <div>
+          <HotspotWrapper
+            x={hotspot.x}
+            y={hotspot.y}
+            onClick={e => handleHotspotClick(e, store, index)}
+          ></HotspotWrapper>
+          <EditHotspot show={hotspot.editable} x={hotspot.x} y={hotspot.y}>
             <input
               id="title"
               value={hotspot.title}
@@ -56,7 +67,7 @@ const Hotspot = props => {
               onChange={e => handleEditHotspot(e, store, index)}
             ></input>
           </EditHotspot>
-        </HotspotWrapper>
+        </div>
       ))
     : null
 }

@@ -1,4 +1,4 @@
-import { ADD_HOTSPOT, EDIT_HOTSPOT_TITLE, EDIT_HOTSPOT_DESCRIPTION } from './actions'
+import { ADD_HOTSPOT, EDIT_HOTSPOT_TITLE, EDIT_HOTSPOT_DESCRIPTION, EDITABLE_HOTSPOT } from './actions'
 
 const initialState = {
   hotspots: [
@@ -6,13 +6,15 @@ const initialState = {
       title: 'Hotspot #1',
       description: 'This is the hotspot #1',
       x: 500,
-      y: 500
+      y: 500,
+      editable: false
     },
     {
       title: 'Hotspot #2',
       description: 'this is the hotspot #2',
       x: 1200,
-      y: 300
+      y: 300,
+      editable: true,
     }
   ]
 }
@@ -45,6 +47,15 @@ const hotspots = (state = [], action) => {
           })
         } else return hotspot
       })
+
+    case EDITABLE_HOTSPOT:
+        return state.map((hotspot, index) => {
+          if (index === action.index) {
+            return Object.assign({}, hotspot, {
+              editable: !hotspot.editable
+            })
+          } else return hotspot
+        })
 
     default:
       return state
