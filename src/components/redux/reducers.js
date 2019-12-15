@@ -34,7 +34,8 @@ const hotspots = (state = [], action) => {
           title: action.title,
           description: action.description,
           x: action.x,
-          y: action.y
+          y: action.y,
+          editable: action.editable
         }
       ]
 

@@ -27,7 +27,7 @@ const handleMouseClick = (e, store) => {
   console.log(e)
   console.log(store.getState())
   document.removeEventListener('mousemove', handleMouseMove)
-  store.dispatch(addHotspot('Hotspot', 'This is a hotspot', e.x, e.y))
+  store.dispatch(addHotspot('Hotspot', 'This is a hotspot', e.x, e.y, true))
   e.target.style.border = 0
 }
 
