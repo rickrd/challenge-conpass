@@ -1,5 +1,5 @@
 import React from 'react'
-import { editHotspotTitle, editHotspotDescription, editableHotspot } from '../redux/actions'
+import { editHotspotTitle, editHotspotDescription } from '../redux/actions'
 import styled from 'styled-components'
 import Dot from '../atoms/Dot'
 
@@ -11,11 +11,22 @@ const EditHotspot = styled.div`
   background-color: #fff;
   border: 1px solid #eee;
   border-radius: 5px;
+  box-shadow: 1px 1px 4px 0px #eee;
   top: ${props => props.y + 20}px;
   left: ${props => props.x - 100}px;
   z-index: 8;
   input {
     border: none;
+    margin: 10px 10px 0 10px;
+    width: 180px;
+    font-size: 14px;
+    &:nth-child(1){
+        font-size: 18px;
+    }
+
+    &:nth-child(2) {
+        opacity: 50%;
+    }
   }
 `
 
