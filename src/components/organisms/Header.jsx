@@ -1,5 +1,6 @@
 import React from 'react'
-import { Logo, Link } from '../atoms'
+import Logo from '../atoms/Logo'
+import Link from '../atoms/Link'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
