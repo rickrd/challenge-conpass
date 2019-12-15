@@ -19,7 +19,6 @@ const Body = styled.div`
 
 const Home = props => {
   const { store } = props
-  console.log(store.getState())
   store.subscribe(() => console.log(store.getState()))
   return (
     <Wrapper>
