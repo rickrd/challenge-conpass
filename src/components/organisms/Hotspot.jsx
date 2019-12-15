@@ -15,16 +15,29 @@ const EditHotspot = styled.div`
   top: ${props => props.y + 20}px;
   left: ${props => props.x - 100}px;
   z-index: 8;
+
+  span {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    top: -6px;
+    transform: rotate(45deg);
+    left: 94px;
+    border-top: 1px solid #cecece5c;
+    border-left: 1px solid #cecece5c;
+  }
+
   input {
     border: none;
     margin: 10px 10px 0 10px;
     width: 180px;
     font-size: 14px;
-    &:nth-child(1){
+    &:nth-child(2){
         font-size: 18px;
     }
 
-    &:nth-child(2) {
+    &:nth-child(3) {
         opacity: 50%;
     }
   }
@@ -43,6 +56,7 @@ const Hotspot = props => {
         <div>
           <Dot hotspot={hotspot} store={store} index={index}></Dot>
           <EditHotspot show={hotspot.editable} x={hotspot.x} y={hotspot.y}>
+              <span></span>
             <input
               id="title"
               value={hotspot.title}
