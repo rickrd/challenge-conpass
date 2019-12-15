@@ -14,11 +14,12 @@ const Wrapper = styled.button`
 `
 
 const handleMouseMove = e => {
-  for (var i = 0; i < document.getElementsByTagName('*').length; i++) {
-    if (document.getElementsByTagName('*')[i] != e.target) {
-      document.getElementsByTagName('*')[i].style.border = 0
-    } else {
-      e.target.style.border = '2px solid red'
+  const elements = document.getElementsByTagName('*')
+  for (var i = 0; i < elements.length; i++) {
+    if (elements[i] != e.target && elements[i].classList.contains('highlight')) {
+      elements[i].classList.remove('highlight')
+    } else if (elements[i] == e.target) {
+      e.target.classList.add('highlight')
     }
   }
 }
