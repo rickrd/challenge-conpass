@@ -7,27 +7,25 @@ import {
 } from './actions'
 
 const initialState = {
-  hotspots: [
-    {
-      title: 'Hotspot #1',
-      description: 'This is the hotspot #1',
-      x: 500,
-      y: 500,
-      editable: false
-    },
-    {
-      title: 'Hotspot #2',
-      description: 'this is the hotspot #2',
-      x: 1200,
-      y: 300,
-      editable: true
-    }
-  ]
+  hotspots: localStorage.getItem('hotspots') ? JSON.parse(localStorage.getItem('hotspots')) : []
 }
 
 const hotspots = (state = [], action) => {
   switch (action.type) {
     case ADD_HOTSPOT:
+      localStorage.setItem(
+        'hotspots',
+        JSON.stringify([
+          ...state,
+          {
+            title: action.title,
+            description: action.description,
+            x: action.x,
+            y: action.y,
+            editable: action.editable
+          }
+        ])
+      )
       return [
         ...state,
         {
